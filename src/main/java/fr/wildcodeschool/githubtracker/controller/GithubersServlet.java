@@ -22,7 +22,7 @@ public class GithubersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("myList", ghs.getAllGithubers());
-            request.getRequestDispatcher("/WEB-INF/githubers.jsp").forward(request,response);
-        }
+        request.getRequestDispatcher("/WEB-INF/githubers.jsp").forward(request,response);
     }
+}
 

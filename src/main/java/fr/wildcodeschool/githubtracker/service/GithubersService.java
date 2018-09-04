@@ -8,7 +8,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.List;
 @Dependent
- public class GithubersService {
+public class GithubersService {
     //private GithuberDAO dao; plus d'acualité depuis MemoryGithuberDAO
     //private MemoryGithuberDAO dao; plus d'actualité depuis le qualifier InMemory
     @Inject  @InMemory GithuberDAO dao;
@@ -24,8 +24,8 @@ import java.util.List;
     }
 
     public Githuber getGithuber(String login) {
-            return getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
-        }
+        return getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
+    }
 
     public void track(String login){
         //TODO

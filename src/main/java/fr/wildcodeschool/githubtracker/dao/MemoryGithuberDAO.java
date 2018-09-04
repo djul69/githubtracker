@@ -32,7 +32,7 @@ public class MemoryGithuberDAO implements GithuberDAO {
 
     public void saveGithuber(Githuber githuber) {
         if (githuber!=null){
-        myMap.put(githuber.getLogin(), githuber);}
+            myMap.put(githuber.getLogin(), githuber);}
     }
 
     /*public Githuber parseGithuber(String login) {
