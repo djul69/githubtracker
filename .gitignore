@@ -1,0 +1,9 @@
+/.classpath
+/.project
+/.settings/
+/target/
+/bin/
+/.idea/
+/out/
+/*.iml
+/src/main/resources/credentials.properties
