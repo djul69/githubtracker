@@ -1,4 +1,7 @@
 package fr.wildcodeschool.githubtracker.dao;
+/**
+ * classe utilisée pour stocker des githubers en memoire a partir d'un login
+ */
 
 import fr.wildcodeschool.githubtracker.GithubUtils;
 import fr.wildcodeschool.githubtracker.model.Githuber;
@@ -6,6 +9,7 @@ import fr.wildcodeschool.githubtracker.model.Githuber;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +61,11 @@ public class MemoryGithuberDAO implements GithuberDAO {
             saveGithuber(githubUtils.parseGithuber(githuber.getLogin()));
 
         }
+    }
+
+    @Override
+    public void deleteGithuber(int id_githuber) throws SQLException {
+
     }
 }
 

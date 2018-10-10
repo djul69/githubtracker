@@ -11,29 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "TrackServlet", urlPatterns="/track")
-public class TrackServlet extends HttpServlet {
-
-    //@Inject  GithuberDAO githuberDAO; plus nécessaire depuis le qualifier InMemory
+@WebServlet(name = "UnTrackServlet",urlPatterns="/UnTrack")
+public class UnTrackServlet extends HttpServlet {
     @Inject
-    GithubersService githubersSevice;
-
-
-
+    GithubersService githubersService;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login= request.getParameter("login");
+    String id=request.getParameter("id_githuber");
+
+    int id_githuber=Integer.parseInt(id);
 
         try {
-            githubersSevice.track(login); //TODO ajouter la gestion des login inexistants
+            githubersService.untrack(id_githuber );
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect("githubers");
+        request.getRequestDispatcher("/WEB-INF/githubersDelete.jsp").forward(request,response);
     }
-
-    /*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }*/
 }
-

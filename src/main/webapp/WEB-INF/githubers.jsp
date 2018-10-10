@@ -9,15 +9,25 @@
 <html>
     <jsp:include page="header.jsp"/>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix ="c"%>
-<body>
-<h3 class = "text-success">Les githubers :</h3>
+<body class = "text-success">
+<h3  style ="text-align: center">Les githubers :</h3>
+<br>
+<div class="form-group">
+    <form action="UnTrack" method=POST>
+        <label>L'ID du githuber à supprimer?</label><br><input name="id_githuber" type="text"><br>
+        <input type="submit" value="Delete">
+    </form>
+</div>
 <div class = "text-center text-info">
 <c:forEach items = "${myList}" var = "item"  varStatus="status">
         <ul class="list-group">
-            <li >name : <c:out value="${item.name}"/></li>
             <li >id : <c:out value="${item.id}"/></li>
-            <li >email : <c:out value="${item.email}"/></li>
+            <li >name : <c:out value="${item.name}"/></li>
             <li >login : <c:out value="${item.login}"/></li>
+            <li >url : <c:out value="${item.url}"/></li>
+            <li >email : <c:out value="${item.email}"/></li>
+            <li >bio : <c:out value="${item.bio}"/></li>
+            <li >location : <c:out value="${item.location}"/></li>
             <li ><img src="${item.avatar}" width="5%" alt=""/></li>
         </ul>
         <div>

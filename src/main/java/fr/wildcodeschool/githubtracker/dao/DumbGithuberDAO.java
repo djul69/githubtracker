@@ -1,8 +1,12 @@
 package fr.wildcodeschool.githubtracker.dao;
+/**
+ * class utilisée pour stocker des githubers en dur
+ */
 
 import fr.wildcodeschool.githubtracker.model.Githuber;
 
 import javax.enterprise.context.Dependent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +32,11 @@ public class DumbGithuberDAO implements GithuberDAO {
 
     public void saveGithuber(Githuber githuber) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void deleteGithuber(int id_githuber) throws SQLException {
+
     }
 }
 

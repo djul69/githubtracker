@@ -23,7 +23,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="githubers">githubers</a></li>
+                <li><a href="githubers">Githubers</a></li>
                 <li><a href="formulaireLogin.jsp">Login</a></li>
             </ul>
         </div>

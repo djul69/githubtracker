@@ -14,7 +14,7 @@
 <div class="form-group">
     <form action="track" method=POST>
         <label>Votre login github?</label><br><input name="login" type="text"><br>
-        <input type="submit" value="Envoyer le formumlaire">
+        <input type="submit" value="Envoyer le formulaire">
     </form>
 </div>
 </body>
