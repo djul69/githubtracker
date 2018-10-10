@@ -133,6 +133,8 @@ public class JDBCGithuberDAO implements GithuberDAO  {
                 try
                 {
                     JDBCHelper.closePrepaerdStatement( ps );
+                    JDBCHelper.closePrepaerdStatement( ps1 );
+                    JDBCHelper.closeResultSet(rs);
                     JDBCHelper.closeConnection( connection );
                 }
                 catch ( SQLException e )
