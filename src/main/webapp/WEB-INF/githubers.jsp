@@ -15,7 +15,7 @@
 <div class="form-group">
     <form action="UnTrack" method=POST>
         <label>L'ID du githuber à supprimer?</label><br><input name="id_githuber" type="text"><br>
-        <input type="submit" value="Delete">
+        <input type="submit" value="UnTrack">
     </form>
 </div>
 <div class = "text-center text-info">

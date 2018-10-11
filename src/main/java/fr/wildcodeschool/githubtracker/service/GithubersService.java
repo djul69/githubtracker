@@ -7,7 +7,6 @@ import fr.wildcodeschool.githubtracker.model.Githuber;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import java.sql.SQLException;
 import java.util.List;
 @Dependent
 public class GithubersService {
@@ -23,20 +22,23 @@ public class GithubersService {
     }
 */
 
-    public List<Githuber> getAllGithubers() throws SQLException {
+    public List<Githuber> getAllGithubers()  {
         return dao.getGithubers();
     }
 
-    public Githuber getGithuber(String login) throws SQLException {
+    public Githuber getGithuber(String login)  {
         return getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
     }
 
-    public void track(String login) throws SQLException{
-         dao.saveGithuber(githubUtils.parseGithuber(login)); //la méthode Track permet de switcher entre un githuberDAO @inmemory ou @injdbc
-        //TODO ajouter la gestion des login inexistants
+    public void track(String login) {
+        try {
+            dao.saveGithuber(githubUtils.parseGithuber(login)); //la méthode Track permet de switcher entre un githuberDAO @inmemory ou @injdbc
+        } catch (NullPointerException e) {
+            throw new RuntimeException("login github non trouvé", e);
+        }
     }
 
-    public void untrack(int id_githuber )throws SQLException {
+    public void untrack(int id_githuber ) {
         dao.deleteGithuber(id_githuber);
     }
 }

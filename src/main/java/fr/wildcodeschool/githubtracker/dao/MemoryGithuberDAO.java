@@ -9,7 +9,6 @@ import fr.wildcodeschool.githubtracker.model.Githuber;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,8 +63,7 @@ public class MemoryGithuberDAO implements GithuberDAO {
     }
 
     @Override
-    public void deleteGithuber(int id_githuber) throws SQLException {
-
+    public void deleteGithuber(int id_githuber)  {
     }
 }
 

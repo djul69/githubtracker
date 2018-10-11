@@ -1,19 +1,18 @@
 package fr.wildcodeschool.githubtracker.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * @author preetham
+ * Classe pour ouvrir et fermer le
  */
 public class JDBCHelper
 {
    private static Connection connection;
 
-   static
+ /*  static      Plus d'actualité avec le DATAPOOL
    {
       try
       {
@@ -29,7 +28,7 @@ public class JDBCHelper
    {
       connection = DriverManager.getConnection( JDBCConstants.URL, JDBCConstants.USER, JDBCConstants.PASS );
       return connection;
-   }
+   }*/
 
    public static void closeConnection( Connection con ) throws SQLException
    {

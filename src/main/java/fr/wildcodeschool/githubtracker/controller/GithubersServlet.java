@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 
 @WebServlet(name = "fr.wildcodeschool.githubtracker.controller.GithubersServlet", urlPatterns = {"/githubers"})
@@ -21,13 +20,7 @@ public class GithubersServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            request.setAttribute("myList", ghs.getAllGithubers());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        request.setAttribute("myList", ghs.getAllGithubers());
         request.getRequestDispatcher("/WEB-INF/githubers.jsp").forward(request,response);
     }
 }

@@ -10,6 +10,6 @@
     <jsp:include page="header.jsp"/>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix ="c"%>
 <body>
-<h3 class = "text-success">Vous venez d'effacer le githuber de la base de donnée Githubertracker!!</h3>
+<h3 class = "text-success">opération de suppression réalisée</h3>
 </body>
 </html>
