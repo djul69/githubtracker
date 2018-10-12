@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Classe pour ouvrir et fermer le
+ * Classe pour ouvrir et fermer le driver, plus d'actualité avec le POOLDATA
  */
 public class JDBCHelper
 {

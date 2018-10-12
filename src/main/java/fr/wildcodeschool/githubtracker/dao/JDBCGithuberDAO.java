@@ -12,11 +12,9 @@ import java.util.List;
 
 @InJdbc
 @Dependent
-
-
 public class JDBCGithuberDAO implements GithuberDAO  {
-@Inject
-private JDBCHelperWithDataSource jdbcHelperWithDataSource;
+    @Inject
+    private JDBCHelperWithDataSource jdbcHelperWithDataSource;
 
     @Override
     public List<Githuber> getGithubers()  {
@@ -45,7 +43,6 @@ private JDBCHelperWithDataSource jdbcHelperWithDataSource;
             } catch (SQLException e) {
                 throw new RuntimeException("pas de donnée dans la liste",e);
             }
-
             finally {
                 try {
                     jdbcHelperWithDataSource.closeResultSet(rs);
@@ -58,79 +55,78 @@ private JDBCHelperWithDataSource jdbcHelperWithDataSource;
             return myList;
         }
 
-        }
+    }
 
-        @Override
-        public void saveGithuber(Githuber githuber) {
-            //Connection connection = null;
-            PreparedStatement ps = null;
+    @Override
+    public void saveGithuber(Githuber githuber) {
+        //Connection connection = null;
+        PreparedStatement ps = null;
+        try {
+            //connection = JDBCHelper.getConnection();
+            ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("INSERT INTO githuber(github_id,name,login,url,email,bio,location,avatar_url) VALUES(?,?,?,?,?,?,?,?)");
+            ps.setInt(1, githuber.getId());
+            ps.setString(2, githuber.getName());
+            ps.setString(3, githuber.getLogin());
+            ps.setString(4, githuber.getUrl());
+            ps.setString(5, githuber.getEmail());
+            ps.setString(6, githuber.getBio());
+            ps.setString(7, githuber.getLocation());
+            ps.setString(8, githuber.getAvatar());
+
+            ps.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("utilisateur déjà dans la base",e);
+        }
+        finally {
             try {
-                //connection = JDBCHelper.getConnection();
-                ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("INSERT INTO githuber(github_id,name,login,url,email,bio,location,avatar_url) VALUES(?,?,?,?,?,?,?,?)");
-                ps.setInt(1, githuber.getId());
-                ps.setString(2, githuber.getName());
-                ps.setString(3, githuber.getLogin());
-                ps.setString(4, githuber.getUrl());
-                ps.setString(5, githuber.getEmail());
-                ps.setString(6, githuber.getBio());
-                ps.setString(7, githuber.getLocation());
-                ps.setString(8, githuber.getAvatar());
-
-                ps.execute();
-
-
-            } catch (SQLException e) {
-                   throw new RuntimeException("utilisateur déjà dans la base",e);
-            }
-            finally {
-                try {
-                    jdbcHelperWithDataSource.closePrepaerdStatement(ps);
-                    jdbcHelperWithDataSource.closeConnection(jdbcHelperWithDataSource.makeConnection());
-                }catch (SQLException e) {
-                        throw new RuntimeException("probléme de fermeture des instances",e);
-                    }
-            }
-
-        }
-        @Override
-        public void deleteGithuber(int id_githuber) {
-            //Connection connection = null;
-            PreparedStatement ps = null;
-            PreparedStatement ps1=null;
-            ResultSet rs=null;
-
-            try
-            {
-                //connection = JDBCHelper.getConnection();
-                String SQL = "DELETE FROM githuber WHERE github_id=?;";
-                String SQL2="SELECT * FROM githuber WHERE github_id="+id_githuber+";";
-                ps1 = jdbcHelperWithDataSource.makeConnection().prepareStatement(SQL2);
-                rs = ps1.executeQuery();
-                if (rs!=null) {
-                    ps = jdbcHelperWithDataSource.makeConnection().prepareStatement(SQL);
-                    ps.setLong(1, id_githuber);
-                    ps.execute();
-                }
-            }
-            catch ( SQLException e )
-            {
-                throw new RuntimeException("utilsateur inexistant",e);
-            }
-
-           finally
-            {
-                try
-                {
-                    jdbcHelperWithDataSource.closePrepaerdStatement( ps );
-                    jdbcHelperWithDataSource.closePrepaerdStatement( ps1 );
-                    jdbcHelperWithDataSource.closeResultSet(rs);
-                    JDBCHelper.closeConnection(jdbcHelperWithDataSource.makeConnection() );
-                }
-                catch ( SQLException e ) {
+                jdbcHelperWithDataSource.closePrepaerdStatement(ps);
+                jdbcHelperWithDataSource.closeConnection(jdbcHelperWithDataSource.makeConnection());
+            }catch (SQLException e) {
                 throw new RuntimeException("probléme de fermeture des instances",e);
             }
+        }
+
+    }
+
+    @Override
+    public void deleteGithuber(int id_githuber) {
+        //Connection connection = null;
+        PreparedStatement ps = null;
+        PreparedStatement ps1=null;
+        ResultSet rs=null;
+
+        try
+        {
+            //connection = JDBCHelper.getConnection();
+            String SQL = "DELETE FROM githuber WHERE github_id=?;";
+            String SQL2="SELECT * FROM githuber WHERE github_id="+id_githuber+";";
+            ps1 = jdbcHelperWithDataSource.makeConnection().prepareStatement(SQL2);
+            rs = ps1.executeQuery();
+            if (rs!=null) {
+                ps = jdbcHelperWithDataSource.makeConnection().prepareStatement(SQL);
+                ps.setLong(1, id_githuber);
+                ps.execute();
             }
         }
+        catch ( SQLException e )
+        {
+            throw new RuntimeException("utilsateur inexistant",e);
+        }
+        finally
+        {
+            try
+            {
+                jdbcHelperWithDataSource.closePrepaerdStatement( ps );
+                jdbcHelperWithDataSource.closePrepaerdStatement( ps1 );
+                jdbcHelperWithDataSource.closeResultSet(rs);
+                JDBCHelper.closeConnection(jdbcHelperWithDataSource.makeConnection() );
+            }
+            catch ( SQLException e ) {
+                throw new RuntimeException("probléme de fermeture des instances",e);
+            }
+        }
+    }
 }
 
 

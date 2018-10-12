@@ -14,7 +14,8 @@ import java.io.IOException;
 public class UnTrackServlet extends HttpServlet {
     @Inject
     GithubersService githubersService;
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id=request.getParameter("id_githuber");
         int id_githuber=Integer.parseInt(id);
 

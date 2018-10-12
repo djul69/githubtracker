@@ -12,6 +12,7 @@ public class Githuber {
     private String url;
     private String bio;
     private String location;
+
     @JsonCreator
     // @JsonIgnoreProperties(ignoreUnknown=true) Plus besoin avec la classe OjectMapperProducer
     public Githuber(@JsonProperty("name") String name, @JsonProperty ("id") int id, @JsonProperty ("email") String email, @JsonProperty ("login") String login, @JsonProperty ("avatar_url") String avatar) {

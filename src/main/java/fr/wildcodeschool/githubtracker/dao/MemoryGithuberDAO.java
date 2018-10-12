@@ -16,7 +16,6 @@ import java.util.Map;
 
 @InMemory
 @ApplicationScoped
-
 public class MemoryGithuberDAO implements GithuberDAO {
     String GIT_ULR ="https://api.github.com/users/";
     Map<String, Githuber> myMap = new HashMap<String, Githuber>();
@@ -27,12 +26,13 @@ public class MemoryGithuberDAO implements GithuberDAO {
 
     /*@Inject
     private ObjectMapper om; plus d'actualité depuis le qualifier*/
-
+    @Override
     public List<Githuber> getGithubers() {
         List<Githuber> newList = new ArrayList<Githuber>(myMap.values());
         return newList;
     }
 
+    @Override
     public void saveGithuber(Githuber githuber) {
         if (githuber!=null){
             myMap.put(githuber.getLogin(), githuber);}

@@ -13,11 +13,8 @@ import java.io.IOException;
 
 @WebServlet(name = "fr.wildcodeschool.githubtracker.controller.GithubersServlet", urlPatterns = {"/githubers"})
 public class GithubersServlet extends HttpServlet {
-
-
-    @Inject private GithubersService ghs; //injection par bdirect field injection
-
-
+    @Inject
+    private GithubersService ghs; //injection par bdirect field injection
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("myList", ghs.getAllGithubers());

@@ -28,7 +28,7 @@
             <li >email : <c:out value="${item.email}"/></li>
             <li >bio : <c:out value="${item.bio}"/></li>
             <li >location : <c:out value="${item.location}"/></li>
-            <li ><img src="${item.avatar}" width="5%" alt=""/></li>
+            <li ><img src="${item.avatar}" width="10%" alt=""/></li>
         </ul>
         <div>
             <hr align="center" width="10%" style="border:1px solid #277b06">

@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-@ApplicationScoped
 
+@ApplicationScoped
 public class GithubUtils {
     String GIT_ULR ="https://api.github.com/users/";
-
     @Inject
     private ObjectMapper om;
 
@@ -30,7 +29,5 @@ public class GithubUtils {
             e.printStackTrace();
             return null;
         }
-
-
     }
 }

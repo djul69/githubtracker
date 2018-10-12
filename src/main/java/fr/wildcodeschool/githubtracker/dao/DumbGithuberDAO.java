@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dependent
 public class DumbGithuberDAO implements GithuberDAO {
-
+    @Override
     public List<Githuber> getGithubers() {
         Githuber user1 = new Githuber("hervé", 34, "hervé@gmail.com", "Hmarionx", "https://api.adorable.io/avatars/141/herv%C3%A9@gmail.com");
         Githuber user2 = new Githuber("jeff", 456, "jeff@gmail.com", "jfm17", "https://api.adorable.io/avatars/141/jeff@gmail.com");
@@ -29,6 +29,7 @@ public class DumbGithuberDAO implements GithuberDAO {
         return myListImmuable;
     }
 
+    @Override
     public void saveGithuber(Githuber githuber) {
         throw new UnsupportedOperationException();
     }
