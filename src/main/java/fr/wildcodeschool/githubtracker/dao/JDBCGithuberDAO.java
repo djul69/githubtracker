@@ -25,12 +25,12 @@ public class JDBCGithuberDAO implements GithuberDAO  {
             List<Githuber> myList = new ArrayList<>();
             try {
                 //connection = JDBCHelper.getConnection(); plus d'actualité avec le DATAPOOL
-                ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("SELECT github_id,name,login,url,email,bio,location,avatar_url FROM githuber;");
+                ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("SELECT id,name,login,url,email,bio,location,avatar_url FROM githuber;");
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
                     Githuber githuber = new Githuber();
-                    githuber.setId(rs.getInt("github_id"));
+                    githuber.setId(rs.getInt("id"));
                     githuber.setName(rs.getString("name"));
                     githuber.setLogin(rs.getString("login"));
                     githuber.setUrl(rs.getString("url"));
@@ -63,7 +63,7 @@ public class JDBCGithuberDAO implements GithuberDAO  {
         PreparedStatement ps = null;
         try {
             //connection = JDBCHelper.getConnection();
-            ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("INSERT INTO githuber(github_id,name,login,url,email,bio,location,avatar_url) VALUES(?,?,?,?,?,?,?,?)");
+            ps = jdbcHelperWithDataSource.makeConnection().prepareStatement("INSERT INTO githuber(id,name,login,url,email,bio,location,avatar_url) VALUES(?,?,?,?,?,?,?,?)");
             ps.setInt(1, githuber.getId());
             ps.setString(2, githuber.getName());
             ps.setString(3, githuber.getLogin());
@@ -99,8 +99,8 @@ public class JDBCGithuberDAO implements GithuberDAO  {
         try
         {
             //connection = JDBCHelper.getConnection();
-            String SQL = "DELETE FROM githuber WHERE github_id=?;";
-            String SQL2="SELECT * FROM githuber WHERE github_id="+id_githuber+";";
+            String SQL = "DELETE FROM githuber WHERE id=?;";
+            String SQL2="SELECT * FROM githuber WHERE id="+id_githuber+";";
             ps1 = jdbcHelperWithDataSource.makeConnection().prepareStatement(SQL2);
             rs = ps1.executeQuery();
             if (rs!=null) {

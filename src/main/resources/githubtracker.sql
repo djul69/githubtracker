@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `githuber`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `githuber` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_bd` int(11) NOT NULL AUTO_INCREMENT,
   `github_id` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `login` varchar(45) DEFAULT NULL,

@@ -3,19 +3,38 @@ package fr.wildcodeschool.githubtracker.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Githuber {
-    private String name;
+import javax.persistence.*;
+import java.io.Serializable;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name = "githuber")
+public class Githuber implements Serializable {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column
+    private int id_bd;
+    @Column
     private int id;
+    @Column
+    private String name;
+    @Column
     private String email;
+    @Column
     private String login;
-    private String avatar;
+    @Column
     private String url;
+    @Column
     private String bio;
+    @Column
     private String location;
+    @Column(name = "avatar_url")
+    private String avatar;
 
     @JsonCreator
     // @JsonIgnoreProperties(ignoreUnknown=true) Plus besoin avec la classe OjectMapperProducer
-    public Githuber(@JsonProperty("name") String name, @JsonProperty ("id") int id, @JsonProperty ("email") String email, @JsonProperty ("login") String login, @JsonProperty ("avatar_url") String avatar) {
+    public Githuber(@JsonProperty("name") String name, @JsonProperty("id") int id, @JsonProperty("email") String email, @JsonProperty("login") String login, @JsonProperty("avatar_url") String avatar) {
         this.name = name;
         this.id = id;
         this.email = email;
@@ -61,37 +80,44 @@ public class Githuber {
         this.location = location;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
-    public void setName(String name)
-    {
-        this.name= name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getEmail()
-    {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email)
-    {
-        this.email= email;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public String getLogin()
-    {
+
+    public String getLogin() {
         return login;
     }
-    public void setLogin(String login)
-    {
-        this.login= login;
+
+    public void setLogin(String login) {
+        this.login = login;
     }
-    public String getAvatar()
-    {
+
+    public String getAvatar() {
         return avatar;
     }
-    public void setAvatar(String avatar)
-    { this.avatar= avatar; }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }
 

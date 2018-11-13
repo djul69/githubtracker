@@ -2,7 +2,7 @@ package fr.wildcodeschool.githubtracker.service;
 
 import fr.wildcodeschool.githubtracker.GithubUtils;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
-import fr.wildcodeschool.githubtracker.dao.InJdbc;
+import fr.wildcodeschool.githubtracker.dao.InJpa;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 
 import javax.enterprise.context.Dependent;
@@ -12,7 +12,7 @@ import java.util.List;
 public class GithubersService {
     //private GithuberDAO dao; plus d'acualité depuis MemoryGithuberDAO
     //private MemoryGithuberDAO dao; plus d'actualité depuis le qualifier InMemory
-    @Inject  @InJdbc //on choisit d'utiliser le DAO memoire ou BDD
+    @Inject  @InJpa //on choisit d'utiliser le DAO memoire ou BDD
     GithuberDAO dao;
     @Inject
     GithubUtils githubUtils;
