@@ -3,11 +3,13 @@ package fr.wildcodeschool.githubtracker.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.*;
 import java.io.Serializable;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@Dependent
 @Entity
 @Table(name = "githuber")
 public class Githuber implements Serializable {
