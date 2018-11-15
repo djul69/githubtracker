@@ -34,18 +34,18 @@ public class RestService {
         githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
         if (githuber == null) {
             ghs.track(login);
-            return Response.created(uriInfo.getBaseUriBuilder().path("githuber").path("{" + login + "}").build("{name}",login)).status(201).build();
+            return Response.created(uriInfo.getBaseUriBuilder().path("githuber").path(login).build()).status(201).entity("retrouvez les infos de " + login + " sur " + uriInfo.getBaseUriBuilder().path("githuber").path(login).toString() + " en méthode GET").build();
         } else {
             return Response.created(null).status(409).entity("Le githuber est déjà dans la base").build();
         }
     }
 
     @GET
-    @Path("/githuber/{name}")
+    @Path("/githuber/{login}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recordedGithuber(@PathParam("name") String login) {
+    public Response recordedGithuber(@PathParam("login") String login) {
         githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
-        return Response.ok("Le nouveau githuber : " + githuber).build();
+        return Response.ok(githuber).build();
     }
 
 
