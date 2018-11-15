@@ -1,6 +1,7 @@
 package fr.wildcodeschool.githubtracker.service;
 
 import fr.wildcodeschool.githubtracker.model.Githuber;
+import fr.wildcodeschool.githubtracker.service.JWT.JWTTokenNeeded;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Dependent
 @Path("/")
+@JWTTokenNeeded
 public class RestService {
     @Inject
     GithubersService ghs;
@@ -45,7 +47,11 @@ public class RestService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response recordedGithuber(@PathParam("login") String login) {
         githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
+        if (githuber == null) {
+            return Response.created(null).status(404).entity("Le githuber n'existe pas").build();
+        } else {
         return Response.ok(githuber).build();
+        }
     }
 
 
