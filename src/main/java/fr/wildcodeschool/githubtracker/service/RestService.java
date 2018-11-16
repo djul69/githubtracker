@@ -50,7 +50,7 @@ public class RestService {
         if (githuber == null) {
             return Response.created(null).status(404).entity("Le githuber n'existe pas").build();
         } else {
-        return Response.ok(githuber).build();
+            return Response.ok(githuber).build();
         }
     }
 

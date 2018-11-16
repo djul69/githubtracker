@@ -2,10 +2,14 @@ package fr.wildcodeschool.githubtracker.model;
 
 import javax.persistence.*;
 
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "user")
+@NamedQueries({
+        @NamedQuery(name = "FIND_BY_LOGIN_PASSWORD", query = "SELECT u FROM Credentials u WHERE u.login = :login AND u.password = :password")
+})
 public class Credentials {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,12 +30,20 @@ public class Credentials {
         this.password = password;
     }
 
-    //getters
+    //Getters and Setters
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     public String getLogin() {
         return login;
     }
 
-    //setters
     public void setLogin(String login) {
         this.login = login;
     }
@@ -43,4 +55,5 @@ public class Credentials {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
