@@ -33,7 +33,7 @@ public class AuthenticatorEndpoint {
     @Consumes(MediaType.APPLICATION_JSON) //eg: { "login": "julien", "password": "......" }
     public Response authentification(Credentials creds) {
         try {
-            //authenticate("julien", "huacrrtc");
+            authenticate(creds.getLogin(), creds.getPassword());
             log.info(String.format("login/password : %s/%s", creds.getLogin(), creds.getPassword()));
             String token = issueToken(creds.getLogin(), creds.getPassword());
             return Response.ok().header(AUTHORIZATION, "Bearer " + token).build(); //renvoi dans le Header le token
