@@ -1,4 +1,4 @@
-package fr.wildcodeschool.githubtracker.service.JWT;
+package fr.wildcodeschool.githubtracker.controller.rest.JWT;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;

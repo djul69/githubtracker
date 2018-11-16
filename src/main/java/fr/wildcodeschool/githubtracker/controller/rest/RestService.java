@@ -1,7 +1,8 @@
-package fr.wildcodeschool.githubtracker.service;
+package fr.wildcodeschool.githubtracker.controller.rest;
 
 import fr.wildcodeschool.githubtracker.model.Githuber;
-import fr.wildcodeschool.githubtracker.service.JWT.JWTTokenNeeded;
+import fr.wildcodeschool.githubtracker.service.GithubersService;
+import fr.wildcodeschool.githubtracker.controller.rest.JWT.JWTTokenNeeded;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -15,11 +16,9 @@ import java.util.List;
 @Dependent
 @Path("/")
 @JWTTokenNeeded
-public class RestService {
+public class  RestService {
     @Inject
     GithubersService ghs;
-    @Inject
-    Githuber githuber;
 
     @GET
     @Path("/githubers")
@@ -33,7 +32,7 @@ public class RestService {
     @Path("/githuber/{login}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response recordGithuber(@Context UriInfo uriInfo, @PathParam("login") String login) {
-        githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
+        Githuber githuber = ghs.getAllGithubers().stream().filter(githuber1 -> githuber1.getLogin().equals(login)).findFirst().orElse(null); //on ne fait pas un inject du githuber car si on a plusieurs acces en meme temps à l'API ca va bugger
         if (githuber == null) {
             ghs.track(login);
             return Response.created(uriInfo.getBaseUriBuilder().path("githuber").path(login).build()).status(201).entity("retrouvez les infos de " + login + " sur " + uriInfo.getBaseUriBuilder().path("githuber").path(login).toString() + " en méthode GET").build();
@@ -46,7 +45,7 @@ public class RestService {
     @Path("/githuber/{login}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response recordedGithuber(@PathParam("login") String login) {
-        githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getLogin().equals(login)).findFirst().orElse(null);
+        Githuber githuber = ghs.getAllGithubers().stream().filter(githuber1 -> githuber1.getLogin().equals(login)).findFirst().orElse(null);
         if (githuber == null) {
             return Response.created(null).status(404).entity("Le githuber n'existe pas").build();
         } else {
@@ -59,7 +58,7 @@ public class RestService {
     @Path("/githuber/{id_githuber}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response eraseGithuber(@PathParam("id_githuber") int id_githuber) {
-        githuber = ghs.getAllGithubers().stream().filter(githuber -> githuber.getId() == id_githuber).findFirst().orElse(null);
+        Githuber githuber = ghs.getAllGithubers().stream().filter(githuber1 -> githuber1.getId() == id_githuber).findFirst().orElse(null);
         if (githuber == null) {
             return Response.created(null).status(404).entity("Le githuber n'existe pas").build();
         } else {

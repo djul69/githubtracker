@@ -1,4 +1,4 @@
-package fr.wildcodeschool.githubtracker.service.JWT;
+package fr.wildcodeschool.githubtracker.controller.rest.JWT;
 
 import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
