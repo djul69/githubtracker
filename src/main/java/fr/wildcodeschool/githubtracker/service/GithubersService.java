@@ -32,7 +32,7 @@ public class GithubersService {
 
     public void track(String login) {
         try {
-            dao.saveGithuber(githubUtils.parseGithuber(login)); //la méthode Track permet de switcher entre un githuberDAO @inmemory ou @injdbc
+            dao.saveGithuber(githubUtils.parseGithuber(login)); //la méthode Track permet de switcher entre un githuberDAO @inmemory ou @injdbc ou @inJpa
         } catch (NullPointerException e) {
             throw new RuntimeException("login github non trouvé", e);
         }

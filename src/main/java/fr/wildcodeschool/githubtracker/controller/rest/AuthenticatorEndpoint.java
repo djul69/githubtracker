@@ -1,15 +1,14 @@
 package fr.wildcodeschool.githubtracker.controller.rest;
 
 import fr.wildcodeschool.githubtracker.model.Credentials;
+import fr.wildcodeschool.githubtracker.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,16 +28,14 @@ public class AuthenticatorEndpoint {
 
     @Context
     private UriInfo uriInfo;
-
-    @PersistenceContext
-    private EntityManager em;
-
+    @Inject
+    UserService userService;
     @POST
     @Consumes(MediaType.APPLICATION_JSON) //eg: { "login": "julien", "password": "......" }
     public Response authentification(Credentials creds) {
         try {
             //userService.authenticateDAO(creds.getLogin(), creds.getPassword());
-            authenticate(creds.getLogin(), creds.getPassword());
+            userService.authenticateDAO(creds.getLogin(), creds.getPassword());
             log.info(String.format("login/password : %s/%s", creds.getLogin(), creds.getPassword()));
             String token = issueToken(creds.getLogin(), creds.getPassword());
             return Response.ok().header(AUTHORIZATION, "Bearer " + token).build(); //renvoi dans le Header le token
@@ -61,14 +58,5 @@ public class AuthenticatorEndpoint {
         log.info("#### generating token for a key : " + jwtToken + " - " + key);
         return jwtToken;
     }
-
-    public void authenticate (String login, String password){
-        TypedQuery<Credentials> query = em.createNamedQuery("FIND_BY_LOGIN_PASSWORD", Credentials.class);
-        query.setParameter("login", login);
-        query.setParameter("password", password);
-        Credentials creds = query.getSingleResult();
-
-        if (creds == null)
-            throw new SecurityException("Invalid user/password");
-    }
 }
+
